@@ -16,9 +16,11 @@
                 $password = $_POST['password'];
                 if (!empty($login) && !empty($password)){
                     require_once 'include/database.php';
-                    $date_creation = date('Y-m-d');
+                    $date_creation = date('Y-m-d H:i:s');
                     $sqlState = $pdo->prepare('INSERT INTO utilisateur VALUE(null,?,?,?)');
                     $sqlState->execute([$login, $password, $date_creation]);
+                    //Redirect
+                    header('location: connexion.php');
                 }
                 else{
                     ?>
