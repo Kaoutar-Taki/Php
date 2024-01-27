@@ -29,6 +29,7 @@
                 }
             }
         ?>
+        <h4>Add User</h4>
         <form action="" method="post">
             <div class="mb-3">
                 <label for="login" class="form-label">Login</label>
