@@ -13,7 +13,6 @@
     <?php include 'include/nav.php' ?>
     <div class="container py-2">
         <?php
-        session_start();
         if (!isset($_SESSION['utilisateur'])) {
             header('location: connexion.php');
         }

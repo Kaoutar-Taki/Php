@@ -21,7 +21,6 @@
                 $sqlState = $pdo->prepare('SELECT * FROM utilisateur WHERE login = ? AND password = ?');
                 $sqlState->execute([$login, $password]);
                 if ($sqlState->rowCount() >= 1) {
-                    session_start();
                     $_SESSION['utilisateur'] = $sqlState->fetch();
                     //redirect
                     header('location: admin.php');

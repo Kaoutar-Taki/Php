@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    $connect = false;
+    if (isset($_SESSION['utilisateur'])) {
+        $connect = true;
+    }
+?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Taki Store</a>
@@ -7,11 +14,27 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php">Add User</a>
+                    <a class="nav-link hover:active" aria-current="page" href="index.php">Add User</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="connexion.php">Connexion</a>
-                </li>
+                <?php
+                    if($connect){
+                ?>
+                    <li class="nav-item">
+                        <a class="nav-link hover:active" aria-current="page" href="addCategory.php">Add Category</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link hover:active" aria-current="page" href="addProduct.php">Add Product</a>
+                    </li>
+                <?php
+                    }
+                    else{
+                        ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="connexion.php">Connexion</a>
+                            </li>
+                        <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>
