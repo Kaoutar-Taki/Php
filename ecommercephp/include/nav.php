@@ -25,6 +25,9 @@
                     <li class="nav-item">
                         <a class="nav-link hover:active" aria-current="page" href="addProduct.php">Add Product</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link hover:active" aria-current="page" href="deconnexion.php">Deconnexion</a>
+                    </li>
                 <?php
                     }
                     else{
