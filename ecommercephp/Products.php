@@ -30,11 +30,11 @@
             <tbody>
                 <?php
                 require_once 'include/database.php';
-                $products = $pdo->query('SELECT * FROM produit')->fetchAll(PDO::FETCH_OBJ);
+                $products = $pdo->query("SELECT produit.* , categorie.libelle as 'categorie_libelle' FROM produit INNER JOIN categorie ON produit.id_categorie = categorie.id")->fetchAll(PDO::FETCH_OBJ);
                 foreach ($products as $product) {
-                    $prix = number_format($product->prix,2);
+                    $prix = $product->prix;
                     $discount = $product->discount;
-                    $prix_after_discount = number_format($prix - ($prix * $discount / 100),2);
+                    $prix_after_discount = $prix - ($prix * $discount / 100);
                 ?>
                     <tr>
                         <th><?= $product->id ?></th>
@@ -48,15 +48,12 @@
                         <?php } ?>
                         <td><?= $prix_after_discount ?> MAD</td>
                         <td>
-                            <?php
-                                $product = $pdo->query('SELECT * FROM categorie WHERE id = '. $product->id_categorie)->fetch(PDO::FETCH_OBJ);
-                                echo $product->libelle;
-                            ?>
+                            <?= $product->categorie_libelle ?>
                         </td>
                         <td><?= $product->date_creation ?></td>
                         <td>
-                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            <a href="editProduct.php?id=<?= $product->id ?>" class="btn btn-warning">Edit</a>
+                            <a href="deleteProduct.php?id=<?= $product->id ?>" onclick="return confirm('Are you sure to delete this product : <?= $product->libelle ?>?')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 <?php
