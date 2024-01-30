@@ -7,7 +7,7 @@
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Taki Store</a>
+        <a class="navbar-brand" href="admin.php">Taki Store</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,6 +19,9 @@
                 <?php
                     if($connect){
                 ?>
+                    <li class="nav-item">
+                        <a class="nav-link hover:active" aria-current="page" href="Categories.php">List Categories</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link hover:active" aria-current="page" href="addCategory.php">Add Category</a>
                     </li>
