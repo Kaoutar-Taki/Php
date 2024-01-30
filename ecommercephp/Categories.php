@@ -36,8 +36,8 @@
                                 <td><?= $categorie['description'] ?></td>
                                 <td><?= $categorie['date_creation'] ?></td>
                                 <td>
-                                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    <a href="editCategory.php?id=<?= $categorie['id'] ?>" class="btn btn-warning">Edit</a>
+                                    <a href="deleteCategory.php?id=<?= $categorie['id']?>" onclick="return confirm('Are you sure to delete this category : <?= $categorie['libelle'] ?>?')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         <?php
