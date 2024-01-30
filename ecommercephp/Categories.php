@@ -36,8 +36,8 @@
                                 <td><?= $categorie['description'] ?></td>
                                 <td><?= $categorie['date_creation'] ?></td>
                                 <td>
-                                    <button type="submit" class="btn btn-primary btn-sm m-2">Edit</button>
-                                    <button type="submit" class="btn btn-danger btn-sm m-2">Delete</button>
+                                    <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                 </td>
                             </tr>
                         <?php

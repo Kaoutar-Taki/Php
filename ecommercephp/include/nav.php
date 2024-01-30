@@ -26,6 +26,9 @@
                         <a class="nav-link hover:active" aria-current="page" href="addCategory.php">Add Category</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link hover:active" aria-current="page" href="Products.php">List Products</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link hover:active" aria-current="page" href="addProduct.php">Add Product</a>
                     </li>
                     <li class="nav-item">

@@ -10,27 +10,26 @@
 </head>
 
 <body>
-    <?php include 'include/nav.php' ;require_once 'include/database.php'; ?>
+    <?php include 'include/nav.php';
+    require_once 'include/database.php'; ?>
     <div class="container py-2">
         <?php
-            if(isset($_POST['AddProduct'])){
-                $libelle = $_POST['libelle'];
-                $prix = $_POST['prix'];
-                $discount = $_POST['discount'];
-                $categorie = $_POST['categorie'];
-                $date_creation = date('Y-m-d H:i:s');
-                if(!empty($libelle) && !empty($prix) && !empty($categorie)){
-                    $sqlState = $pdo->prepare('INSERT INTO produit VALUE(null,?,?,?,?,?)');
-                    $sqlState->execute([$libelle, $prix, $discount, $categorie, $date_creation]);
-                    ?>
-                        <div class="alert alert-success" role="alert">Product <?= $libelle ?> is added</div>
-                    <?php
-                }else{
-                    ?>
-                        <div class="alert alert-danger">libelle, prix and categorie are required</div>
-                    <?php
-                }
+        if (isset($_POST['AddProduct'])) {
+            $libelle = $_POST['libelle'];
+            $prix = $_POST['prix'];
+            $discount = $_POST['discount'];
+            $categorie = $_POST['categorie'];
+            $date_creation = date('Y-m-d H:i:s');
+            if (!empty($libelle) && !empty($prix) && !empty($categorie)) {
+                $sqlState = $pdo->prepare('INSERT INTO produit VALUE(null,?,?,?,?,?)');
+                $sqlState->execute([$libelle, $prix, $discount, $categorie, $date_creation]);
+                header('location:Products.php');
+            } else {
+        ?>
+                <div class="alert alert-danger">libelle, prix and categorie are required</div>
+        <?php
             }
+        }
         ?>
         <h4>Add Product</h4>
         <form action="" method="post">
