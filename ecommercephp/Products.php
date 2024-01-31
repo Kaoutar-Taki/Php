@@ -18,7 +18,9 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Libelle</th>
+                    <th scope="col">Description</th>
                     <th scope="col">Prix</th>
                     <th scope="col">Discount</th>
                     <th scope="col">Prix after discount</th>
@@ -38,7 +40,9 @@
                 ?>
                     <tr>
                         <th><?= $product->id ?></th>
+                        <th><img src="upload/products/<?= $product->image ?>" alt="" width="100" height="100"></th>
                         <td><?= $product->libelle ?></td>
+                        <td><?= $product->description ?></td>
                         <td><?= $prix ?> MAD</td>
                         <?php if ($discount == 0) { ?>
                             <td>No discount</td>

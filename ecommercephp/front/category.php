@@ -34,26 +34,32 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
             ?>
                 <div class="col">
                     <div class="card h-100">
-                        <img src="../assets/bougie1.jpg" class="card-img-top" width="100%" height="300" alt="...">
+                        <img src="../upload/products/<?= $product['image'] ?>" class="card-img-top" width="100%" height="300" alt="<?= $product['libelle'] ?>">
                         <div class="card-body">
                             <h4 class="card-title"><?= $product['libelle'] ?></h4>
-                            <h6>Discount : <?= $product['discount']?>%</h6>
-                            <small>Add the : <?= date_format(date_create($product['date_creation']),"d/m/Y")?></small>
+                            <p class="card-text"><?= $product['description'] ?></p>
+                            <?php if ($discount == 0) { ?>
+                                <h6>No discount</h6>
+                            <?php } ?>
+                            <?php if ($discount != 0) { ?>
+                                <h6>Discount : <?= $discount ?> %</h6>
+                            <?php } ?>
+                            <small>Add the : <?= date_format(date_create($product['date_creation']), "d/m/Y") ?></small>
                         </div>
                         <div class="card-footer">
-                            <del><small class="text-body-secondary"><?=$prix ?>MAD</small></del>
+                            <del><small class="text-body-secondary"><?= $prix ?>MAD</small></del>
                             <small class="text-body-secondary"><?= $prix_after_discount ?>MAD</small>
                         </div>
                     </div>
                 </div>
             <?php
             }
-            if (empty($products)){
-                ?>
-                    <div class="alert alert-warning" role="alert">
-                        No Product in this category
-                    </div>
-                <?php
+            if (empty($products)) {
+            ?>
+                <div class="alert alert-warning" role="alert">
+                    No Product in this category
+                </div>
+            <?php
             }
             ?>
         </div>
