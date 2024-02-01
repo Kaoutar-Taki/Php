@@ -40,7 +40,7 @@
                 ?>
                     <tr>
                         <th><?= $product->id ?></th>
-                        <th><img src="upload/products/<?= $product->image ?>" alt="" width="100" height="100"></th>
+                        <th><img src="upload/products/<?= $product->image ?>" alt="" width="100" class="image-fluid" height="100"></th>
                         <td><?= $product->libelle ?></td>
                         <td><?= $product->description ?></td>
                         <td><?= $prix ?> MAD</td>

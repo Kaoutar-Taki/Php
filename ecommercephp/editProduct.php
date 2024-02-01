@@ -23,10 +23,25 @@
             $prix = $_POST['prix'];
             $discount = $_POST['discount'];
             $categorie = $_POST['categorie'];
+            $description = $_POST['description'];
+            $fileName = "";
+            if (!empty($_FILES['image']['name'])) {
+                $image = $_FILES['image']['name'];
+                $fileName = uniqid() . $image;
+                move_uploaded_file($_FILES['image']['tmp_name'], 'upload/products/' . $fileName);
+            }
             if (!empty($libelle) && !empty($prix) && !empty($categorie)) {
-                $sqlState = $pdo->prepare('UPDATE produit SET libelle =?, prix =?, discount =?, id_categorie =? WHERE id =?');
-                $sqlState->execute([$libelle, $prix, $discount, $categorie, $id]);
-                header('location:Products.php');
+                if (!empty($fileName)) {
+                    $query = 'UPDATE produit SET libelle =?, prix =?, discount =?, id_categorie =?, description =?, image =? WHERE id =?';
+                    $sqlState = $pdo->prepare($query);
+                    $sqlState->execute([$libelle, $prix, $discount, $categorie, $description, $fileName, $id]);
+                    header('location:Products.php');
+                } else {
+                    $query = 'UPDATE produit SET libelle =?, prix =?, discount =?, id_categorie =?, description =? WHERE id =?';
+                    $sqlState = $pdo->prepare($query);
+                    $sqlState->execute([$libelle, $prix, $discount, $categorie, $description, $id]);
+                    header('location:Products.php');
+                }
             } else {
         ?>
                 <div class="alert alert-danger">libelle, prix, and categorie are required</div>
@@ -34,14 +49,18 @@
             }
         }
         ?>
-        <h4>Edit Category</h4>
-        <form action="" method="post">
+        <h4>Edit Product</h4>
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <input type="hidden" class="form-control" id="id" name="id" value="<?= $product->id ?>" readonly>
             </div>
             <div class="mb-3">
                 <label for="libelle" class="form-label">Libelle</label>
                 <input type="text" class="form-control" id="libelle" name="libelle" value="<?= $product->libelle ?>">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" cols="30" rows="10"><?= $product->description ?></textarea>
             </div>
             <div class="mb-3">
                 <label for="prix" class="form-label">Prix</label>
@@ -51,6 +70,11 @@
                 <label for="discount" class="form-label">Discount</label>
                 <input type="range" name="discount" class="form-control" id="discount" min="0" max="90" value="<?= $product->discount ?>" />
             </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" name="image" class="form-control" id="image" />
+            </div>
+            <img width="250" src="upload/products/<?= $product->image ?>" class="img-fluid" alt="">
             <div class="mb-3">
                 <label for="categorie" class="form-label">Categorie</label>
                 <select name="categorie" class="form-select" id="">

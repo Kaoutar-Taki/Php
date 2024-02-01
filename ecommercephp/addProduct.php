@@ -21,8 +21,8 @@
             $categorie = $_POST['categorie'];
             $description = $_POST['description'];  
 
-            $image = "";    
-            if (isset($_FILES['image'])){
+            $fileName = "dafaultProduct.png";    
+            if (!empty($_FILES['image']['name'])){
                 $image = $_FILES['image']['name'];
                 $fileName = uniqid().$image;
                 move_uploaded_file($_FILES['image']['tmp_name'],'upload/products/'.$fileName) ;
