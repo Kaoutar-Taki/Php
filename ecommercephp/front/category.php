@@ -18,52 +18,54 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Ktaki | category : <?= $category['libelle'] ?></title>
 </head>
 
 <body>
     <?php include "../include/nav-front.php" ?>
-    <div class="container py-2">
-        <h4><i class="<?= $category['icon'] ?>"></i> <?= $category['libelle'] ?></h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php
-            foreach ($products as $product) {
-                $prix = $product['prix'];
-                $discount = $product['discount'];
-                $prix_after_discount = $prix - ($prix * $discount / 100);
-            ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../upload/products/<?= $product['image'] ?>" class="card-img-top" width="100%" height="300" alt="<?= $product['libelle'] ?>">
-                        <div class="card-body">
-                            <h4 class="card-title"><?= $product['libelle'] ?></h4>
-                            <p class="card-text"><?= $product['description'] ?></p>
-                            <?php if ($discount == 0) { ?>
-                                <h6>No discount</h6>
-                            <?php } ?>
-                            <?php if ($discount != 0) { ?>
-                                <h6>Discount : <?= $discount ?> %</h6>
-                            <?php } ?>
-                            <small>Add the : <?= date_format(date_create($product['date_creation']), "d/m/Y") ?></small>
-                        </div>
-                        <div class="card-footer">
-                            <del><small class="text-body-secondary"><?= $prix ?>MAD</small></del>
-                            <small class="text-body-secondary"><?= $prix_after_discount ?>MAD</small>
+    <div class="text-center p-10">
+        <h1 class="font-bold text-4xl mb-4"><i class="<?= $category['icon'] ?>"></i> <?= $category['libelle'] ?></h1>
+        <h1 class="text-3xl"><?= $category['description'] ?></h1>
+    </div>
+    <section id="Projects" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+        <?php
+        foreach ($products as $product) {
+            $prix = $product['prix'];
+            $discount = $product['discount'];
+            $prix_after_discount = $prix - ($prix * $discount / 100);
+        ?>
+            <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#">
+                    <img src="../upload/products/<?= $product['image'] ?>" alt="<?= $product['libelle'] ?>" class="h-80 w-80 object-cover rounded-t-xl card-img-top" />
+                    <div class="px-4 py-3 w-72">
+                        <span class="text-gray-400 mr-3 uppercase text-xs"><?= date_format(date_create($product['date_creation']), "d/m/Y") ?></span>
+                        <p class="text-lg font-bold text-black truncate block capitalize"><?= $product['libelle'] ?></p>
+                        <div class="flex items-center">
+                            <p class="text-lg font-semibold text-black cursor-auto my-3"><?= $prix_after_discount ?> MAD</p>
+                            <del>
+                                <p class="text-sm text-gray-600 cursor-auto ml-2"><?= $prix ?> MAD</p>
+                            </del>
+                            <div class="ml-auto">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php
-            }
-            if (empty($products)) {
-            ?>
-                <div class="alert alert-warning" role="alert">
-                    No Product in this category
-                </div>
-            <?php
-            }
-            ?>
+                </a>
+            </div>
+        <?php
+        }
+        ?>
+    </section>
+    <?php
+    if (empty($products)) {
+    ?>
+        <div class="alert alert-warning" role="alert">
+            No Product in this category
         </div>
-    </div>
+    <?php
+    }
+    ?>
 </body>
 
 </html>
