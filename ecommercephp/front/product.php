@@ -1,13 +1,10 @@
 <?php
 require_once "../include/database.php";
 $id = $_GET['id'];
-$sqlState = $pdo->prepare("SELECT * FROM categorie WHERE id=? ");
+$sqlState = $pdo->prepare("SELECT * FROM produit WHERE id=? ");
 $sqlState->execute([$id]);
-$category = $sqlState->fetch(PDO::FETCH_ASSOC);
+$product = $sqlState->fetch(PDO::FETCH_ASSOC);
 
-$sqlState = $pdo->prepare("SELECT * From produit WHERE id_categorie=?");
-$sqlState->execute([$id]);
-$products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,88 +16,66 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Ktaki | category : <?= $category['libelle'] ?></title>
+    <title>Ktaki | Product : <?= $product['libelle'] ?></title>
 </head>
 
 <body>
-    <?php include "../include/nav-front.php" ?>
-    <div class="container py-2">
-        <h4><i class="<?= $category['icon'] ?>"></i> <?= $category['libelle'] ?></h4>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php
-            foreach ($products as $product) {
-                $prix = $product['prix'];
-                $discount = $product['discount'];
-                $prix_after_discount = $prix - ($prix * $discount / 100);
-            ?>
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="../upload/products/<?= $product['image'] ?>" class="card-img-top" width="100%" height="300" alt="<?= $product['libelle'] ?>">
-                        <div class="card-body">
-                            <h4 class="card-title"><?= $product['libelle'] ?></h4>
-                            <p class="card-text"><?= $product['description'] ?></p>
-                            <?php if ($discount == 0) { ?>
-                                <h6>No discount</h6>
-                            <?php } ?>
-                            <?php if ($discount != 0) { ?>
-                                <h6>Discount : <?= $discount ?> %</h6>
-                            <?php } ?>
-                            <small>Add the : <?= date_format(date_create($product['date_creation']), "d/m/Y") ?></small>
-                        </div>
-                        <div class="card-footer">
-                            <del><small class="text-body-secondary"><?= $prix ?>MAD</small></del>
-                            <small class="text-body-secondary"><?= $prix_after_discount ?>MAD</small>
-                        </div>
+    <?php include "../include/nav-front.php";
+    $prix = $product['prix'];
+    $discount = $product['discount'];
+    $prix_after_discount = $prix - ($prix * $discount / 100);
+    ?>
+    <div class="bg-gray-100 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row -mx-4">
+                <div class="md:flex-1 px-4">
+                    <div class="h-[460px] rounded-lg bg-gray-300  mb-4">
+                        <img class="w-full h-full object-cover" src="../upload/products/<?= $product['image'] ?>" alt="<?= $product['libelle'] ?>">
                     </div>
                 </div>
-            <?php
-            }
-            if (empty($products)) {
-            ?>
-                <div class="alert alert-warning" role="alert">
-                    No Product in this category
-                </div>
-            <?php
-            }
-            ?>
-        </div>
-    </div>
-    <section>
-        <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-            <header class="text-center">
-                <h2 class="text-xl font-bold text-gray-900 sm:text-3xl"><i class="<?= $category['icon'] ?>"></i> <?= $category['libelle'] ?></h2>
-                <p class="mx-auto mt-4 max-w-md text-gray-500">
-                    <?= $category['description'] ?>
-                </p>
-            </header>
-            <ul class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
-                <?php
-                foreach ($products as $product) {
-                ?>
-                    <li>
-                        <div class="group relative block">
-                            <img src="../upload/products/<?= $product['image'] ?>" alt="" class="aspect-square w-full object-cover transition duration-500 group-hover:opacity-90" />
-                            <div class="absolute inset-0 flex flex-col items-start justify-end p-6">
-                                <h3 class="text-xl font-medium text-gray"><?= $product['libelle'] ?></h3>
-                                <span class="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white">
-                                    <a href="product.php?id=<?= $product['id'] ?>" class="stretched-link">Show More</a>
-                                </span>
+                <div class="md:flex-1 px-4">
+                    <h2 class="text-2xl font-bold text-gray-800  mb-2"><?= $product['libelle'] ?></h2>
+                    <?php
+                    if ($discount == 0) {
+                    ?>
+                        <div class="flex mb-4">
+                            <div class="mr-4">
+                                <span class="font-bold text-gray-700">Price:</span>
+                                <span class="text-gray-600"><?= $prix ?>MAD</span>
                             </div>
                         </div>
-                    </li>
-                <?php
-                }
-                if (empty($products)) {
-                ?>
-                    <div role="alert" class="rounded border-s-4 border-orange-500 bg-orange-50 p-4">
-                        <strong class="block font-medium text-orange-800"> No Product in this category </strong>
+                    <?php
+                    } else {
+                    ?>
+                        <div class="flex mb-4">
+                            <div class="mr-4 items-center">
+                                <span class="font-bold text-gray-700">Price:</span>
+                                <span class="text-gray-600"><?= $prix_after_discount ?>MAD</span>
+                                <del><span class="text-gray-600"><?= $prix ?>MAD</span></del>
+                            </div>
+                            <div class="mr-4 items-center">
+                                <span class="font-bold text-gray-700">Discount: </span>
+                                <span class="inline-flex items-center rounded-md bg-green-100 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">-<?= $discount ?> %</span>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                    <div>
+                        <span class="font-bold text-gray-700">Product Description:</span>
+                        <p class="text-gray-600 text-sm mt-2">
+                            <?= $product['description'] ?>
+                        </p>
                     </div>
-                <?php
-                }
-                ?>
-            </ul>
+                    <div>
+                        <div class="flex -mx-2 mb-4">
+                        </div>
+                        <a href=""><button class="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">Add to Cart</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
 </body>
 
 </html>

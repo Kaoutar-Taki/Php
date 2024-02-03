@@ -36,7 +36,7 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
             $prix_after_discount = $prix - ($prix * $discount / 100);
         ?>
             <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-                <a href="#">
+                <a href="product.php?id=<?= $product['id'] ?>">
                     <img src="../upload/products/<?= $product['image'] ?>" alt="<?= $product['libelle'] ?>" class="h-80 w-80 object-cover rounded-t-xl card-img-top" />
                     <div class="px-4 py-3 w-72">
                         <span class="text-gray-400 mr-3 uppercase text-xs"><?= date_format(date_create($product['date_creation']), "d/m/Y") ?></span>
