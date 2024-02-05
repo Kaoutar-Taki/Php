@@ -68,14 +68,26 @@ $product = $sqlState->fetch(PDO::FETCH_ASSOC);
                         </p>
                     </div>
                     <div>
-                        <div class="flex -mx-2 mb-4">
+                        <div class="flex -mx-2 m-4">
+                            <label for="Quantity" class="sr-only"> Quantity </label>
+                            <div class="flex justify-center items-center gap-1">
+                                <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-minus">
+                                    &minus;
+                                </button>
+                                <input type="number" name="Quantity" id="Quantity" value="1" class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
+                                <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-plus">
+                                    &plus;
+                                </button>
+                            </div>
                         </div>
-                        <a href=""><button class="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">Add to Cart</button></a>
+                        <a href=""><button class="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">View Cart</button></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="../assets/js/products/counter.js"> </script>
 </body>
 
 </html>

@@ -36,22 +36,33 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
             $prix_after_discount = $prix - ($prix * $discount / 100);
         ?>
             <div class="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
-                <a href="product.php?id=<?= $product['id'] ?>">
-                    <img src="../upload/products/<?= $product['image'] ?>" alt="<?= $product['libelle'] ?>" class="h-80 w-80 object-cover rounded-t-xl card-img-top" />
-                    <div class="px-4 py-3 w-72">
-                        <span class="text-gray-400 mr-3 uppercase text-xs"><?= date_format(date_create($product['date_creation']), "d/m/Y") ?></span>
-                        <p class="text-lg font-bold text-black truncate block capitalize"><?= $product['libelle'] ?></p>
-                        <div class="flex items-center">
-                            <p class="text-lg font-semibold text-black cursor-auto my-3"><?= $prix_after_discount ?> MAD</p>
-                            <del>
-                                <p class="text-sm text-gray-600 cursor-auto ml-2"><?= $prix ?> MAD</p>
-                            </del>
-                            <div class="ml-auto">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </div>
+                <img src="../upload/products/<?= $product['image'] ?>" alt="<?= $product['libelle'] ?>" class="h-80 w-80 object-cover rounded-t-xl card-img-top" />
+                <div class="px-4 w-72">
+                    <span class="text-gray-400 mr-3 uppercase text-xs"><?= date_format(date_create($product['date_creation']), "d/m/Y") ?></span>
+                    <p class="text-lg font-bold text-black truncate block capitalize"><?= $product['libelle'] ?></p>
+                    <div class="flex items-center">
+                        <p class="text-lg font-semibold text-black cursor-auto my-3"><?= $prix_after_discount ?> MAD</p>
+                        <del>
+                            <p class="text-sm text-gray-600 cursor-auto ml-2"><?= $prix ?> MAD</p>
+                        </del>
+                        <div class="ml-auto">
+                            <a href="product.php?id=<?= $product['id'] ?>">
+                                <i class="fa-solid fa-arrow-right"></i> </a>
                         </div>
                     </div>
-                </a>
+                </div>
+                <div>
+                    <label for="Quantity" class="sr-only"> Quantity </label>
+                    <div class="flex justify-center items-center gap-1">
+                        <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-minus">
+                            &minus;
+                        </button>
+                        <input type="number" name="Quantity" id="Quantity" value="1" class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
+                        <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-plus">
+                            &plus;
+                        </button>
+                    </div>
+                </div>
             </div>
         <?php
         }
@@ -66,6 +77,9 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
     <?php
     }
     ?>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="../assets/js/products/counter.js">
+    </script>
 </body>
 
 </html>
