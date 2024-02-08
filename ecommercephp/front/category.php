@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../include/database.php";
 $id = $_GET['id'];
 $sqlState = $pdo->prepare("SELECT * FROM categorie WHERE id=? ");
@@ -31,6 +32,7 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
     <section id="Projects" class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
         <?php
         foreach ($products as $product) {
+            $idProduct = $product['id'];
             $prix = $product['prix'];
             $discount = $product['discount'];
             $prix_after_discount = $prix - ($prix * $discount / 100);
@@ -46,22 +48,13 @@ $products = $sqlState->fetchAll(PDO::FETCH_ASSOC);
                             <p class="text-sm text-gray-600 cursor-auto ml-2"><?= $prix ?> MAD</p>
                         </del>
                         <div class="ml-auto">
-                            <a href="product.php?id=<?= $product['id'] ?>">
+                            <a href="product.php?id=<?= $idProduct ?>">
                                 <i class="fa-solid fa-arrow-right"></i> </a>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <label for="Quantity" class="sr-only"> Quantity </label>
-                    <div class="flex justify-center items-center gap-1">
-                        <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-minus">
-                            &minus;
-                        </button>
-                        <input type="number" name="Quantity" id="Quantity" value="1" class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
-                        <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-plus">
-                            &plus;
-                        </button>
-                    </div>
+                    <?php include "counter.php" ?>
                 </div>
             </div>
         <?php

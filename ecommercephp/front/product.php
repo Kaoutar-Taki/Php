@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../include/database.php";
 $id = $_GET['id'];
 $sqlState = $pdo->prepare("SELECT * FROM produit WHERE id=? ");
@@ -67,21 +68,10 @@ $product = $sqlState->fetch(PDO::FETCH_ASSOC);
                             <?= $product['description'] ?>
                         </p>
                     </div>
-                    <div>
-                        <div class="flex -mx-2 m-4">
-                            <label for="Quantity" class="sr-only"> Quantity </label>
-                            <div class="flex justify-center items-center gap-1">
-                                <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-minus">
-                                    &minus;
-                                </button>
-                                <input type="number" name="Quantity" id="Quantity" value="1" class="h-10 w-16 rounded border-gray-200 text-center [-moz-appearance:_textfield] sm:text-sm [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none" />
-                                <button type="button" class="h-10 w-10 leading-10 text-gray-600 transition hover:opacity-75 counter-plus">
-                                    &plus;
-                                </button>
-                            </div>
-                        </div>
-                        <a href=""><button class="w-full bg-gray-900 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 ">View Cart</button></a>
-                    </div>
+                    <?php 
+                        $idProduct = $product['id'];
+                        include "counter.php"
+                    ?>
                 </div>
             </div>
         </div>
