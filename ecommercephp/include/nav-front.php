@@ -5,5 +5,8 @@
             <a href="index.php">List Categories</a>
         </li>
     </ul>
-    <a href="card.php"><i class="fa-solid fa-cart-shopping"></i>Card</a>
+    <?php
+        $idUser = $_SESSION['utilisateur']['id'];
+    ?>
+    <a href="card.php"><i class="fa-solid fa-cart-shopping"></i>Card(<?php echo count($_SESSION['cart'][$idUser]); ?>)</a>
 </nav>

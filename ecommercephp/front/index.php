@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +14,7 @@
 </head>
 
 <body>
-<?php include "../include/nav-front.php" ?>
+    <?php include "../include/nav-front.php" ?>
     <div class="container py-2">
         <?php
         require_once "../include/database.php";
@@ -24,7 +27,7 @@
             ?>
                 <li class="list-group-item">
                     <a href="category.php?id=<?= $category->id ?>" class="btn btn-light btn-sm">
-                    <i class="<?= $category->icon ?>"></i> <?= $category->libelle ?>
+                        <i class="<?= $category->icon ?>"></i> <?= $category->libelle ?>
                     </a>
                 </li>
             <?php

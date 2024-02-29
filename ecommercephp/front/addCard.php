@@ -9,6 +9,10 @@ $idUser = $_SESSION['utilisateur']['id'];
 if (!isset($_SESSION['cart'][$idUser])) {
     $_SESSION['cart'][$idUser] = [];
 }
-$_SESSION['cart'][$idUser][$id] = $Quantity;
+if ($Quantity == 0){
+    unset($_SESSION['cart'][$idUser][$id]);
+}else{
+    $_SESSION['cart'][$idUser][$id] = $Quantity;
+}
 
 header("Location: product.php?id=$id");
