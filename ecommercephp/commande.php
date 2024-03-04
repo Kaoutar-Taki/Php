@@ -14,7 +14,7 @@ $commande = $sqlState->fetch(PDO::FETCH_ASSOC);
 
 <head>
     <?php include 'include/head.php' ?>
-    <title>Commande | Numéro <?= $commande['id'] ?> </title>
+    <title>Ktaki | Commande | Numéro <?= $commande['id'] ?> </title>
 </head>
 
 <body>
