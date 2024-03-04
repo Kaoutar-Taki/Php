@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <?php include 'include/head.php' ?>
-    <title>Ajouter catégorie</title>
+    <title>Ktaki | Ajouter catégorie</title>
 </head>
 <body>
 <?php include 'include/nav.php' ?>
