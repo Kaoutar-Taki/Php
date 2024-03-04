@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <?php include 'include/head.php' ?>
-    <title>Ajouter produit</title>
+    <title>Ktaki | Ajouter produit</title>
 </head>
 <body>
 <?php

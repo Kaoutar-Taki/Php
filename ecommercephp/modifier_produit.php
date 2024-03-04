@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'include/head.php' ?>
-    <title>Modifier produit</title>
+    <title>Ktaki | Modifier produit</title>
 </head>
 
 <body>
