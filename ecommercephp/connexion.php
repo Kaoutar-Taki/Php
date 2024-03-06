@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'include/head.php' ?>
-    <title>Connexion</title>
+    <title>Ktaki | Connexion</title>
 </head>
 
 <body>
