@@ -3,7 +3,7 @@
 
 <head>
     <?php include 'include/head.php' ?>
-    <title>Accueil</title>
+    <title>Ktaki | Accueil</title>
 </head>
 
 <body>
