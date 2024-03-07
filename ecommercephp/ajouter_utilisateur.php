@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <?php include 'include/head.php' ?>
-    <title>Ajouter utilisateur</title>
+    <title>Ktaki | Ajouter utilisateur</title>
 </head>
 <body>
 <?php include 'include/nav.php' ?>
