@@ -10,11 +10,10 @@ $idUtilisateur = $_SESSION['utilisateur']['id'];
 if (!isset($_SESSION['panier'][$idUtilisateur])) {
     $_SESSION['panier'][$idUtilisateur] = [];
 }
-if($qty == 0){
+if ($qty == 0) {
     unset($_SESSION['panier'][$idUtilisateur][$id]);
-}else{
+} else {
     $_SESSION['panier'][$idUtilisateur][$id] = $qty;
 }
 
-header("location:".$_SERVER['HTTP_REFERER']);
-
+header("location:" . $_SERVER['HTTP_REFERER']);
