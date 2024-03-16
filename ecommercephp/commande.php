@@ -1,13 +1,9 @@
 <?php
 require_once 'include/database.php';
 $idCommande = $_GET['id'];
-$sqlState = $pdo->prepare('SELECT commande.*,utilisateur.login as "login" FROM commande 
-            INNER JOIN utilisateur ON commande.id_client = utilisateur.id 
-                                               WHERE commande.id = ?
-                                               ORDER BY commande.date_creation DESC');
+$sqlState = $pdo->prepare('SELECT commande.*,utilisateur.login as "login" FROM commande  INNER JOIN utilisateur ON commande.id_client = utilisateur.id  WHERE commande.id = ? ORDER BY commande.date_creation DESC');
 $sqlState->execute([$idCommande]);
 $commande = $sqlState->fetch(PDO::FETCH_ASSOC);
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,10 +29,7 @@ $commande = $sqlState->fetch(PDO::FETCH_ASSOC);
             </thead>
             <tbody>
                 <?php
-                $sqlStateLigneCommandes = $pdo->prepare('SELECT ligne_commande.*,produit.libelle,produit.image from ligne_commande
-                                                        INNER JOIN produit ON ligne_commande.id_produit = produit.id
-                                                        WHERE id_commande = ?
-                                                        ');
+                $sqlStateLigneCommandes = $pdo->prepare('SELECT ligne_commande.*,produit.libelle,produit.image from ligne_commande INNER JOIN produit ON ligne_commande.id_produit = produit.id  WHERE id_commande = ?');
                 $sqlStateLigneCommandes->execute([$idCommande]);
                 $lignesCommandes = $sqlStateLigneCommandes->fetchAll(PDO::FETCH_OBJ);
                 ?>
@@ -84,7 +77,6 @@ $commande = $sqlState->fetch(PDO::FETCH_ASSOC);
             </tbody>
         </table>
     </div>
-
 </body>
 
 </html>

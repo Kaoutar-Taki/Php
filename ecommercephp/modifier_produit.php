@@ -24,42 +24,25 @@
             $discount = $_POST['discount'];
             $categorie = $_POST['categorie'];
             $description = $_POST['description'];
-
             $filename = '';
             if (!empty($_FILES['image']['name'])) {
                 $image = $_FILES['image']['name'];
                 $filename = uniqid() . $image;
-                move_uploaded_file($_FILES['image']['tmp_name'], 'upload/produit/' . $filename);
+                move_uploaded_file($_FILES['image']['tmp_name'], 'upload/products/' . $filename);
             }
-
-
             if (!empty($libelle) && !empty($prix) && !empty($categorie)) {
-
                 if (!empty($filename)) {
-                    $query = "UPDATE produit SET libelle=? ,
-                                                    prix=? ,
-                                                    discount=? ,
-                                                    id_categorie=?,
-                                                    description=?,
-                                                    image=?
-                                                WHERE id = ? ";
+                    $query = "UPDATE produit SET libelle=?,prix=?,discount=?,id_categorie=?,description=?,image=? WHERE id = ? ";
                     $sqlState = $pdo->prepare($query);
                     $updated = $sqlState->execute([$libelle, $prix, $discount, $categorie, $description, $filename, $id]);
                 } else {
-                    $query = "UPDATE produit 
-                                                SET libelle=? ,
-                                                    prix=? ,
-                                                    discount=? ,
-                                                    id_categorie=?,
-                                                    description=?
-                                                WHERE id = ? ";
+                    $query = "UPDATE produit  SET libelle=?,prix=?,discount=?,id_categorie=?, description=? WHERE id = ? ";
                     $sqlState = $pdo->prepare($query);
                     $updated = $sqlState->execute([$libelle, $prix, $discount, $categorie, $description, $id]);
                 }
                 if ($updated) {
                     header('location: produits.php');
                 } else {
-
         ?>
                     <div class="alert alert-danger" role="alert">
                         Database error (40023).
@@ -79,23 +62,17 @@
             <input type="hidden" name="id" value="<?= $produit->id ?>">
             <label class="form-label">Libelle</label>
             <input type="text" class="form-control" name="libelle" value="<?= $produit->libelle ?>">
-
             <label class="form-label">Prix</label>
             <input type="number" class="form-control" step="0.1" name="prix" min="0" value="<?= $produit->prix ?>">
-
             <label class="form-label">Discount</label>
             <input type="range" value="0" class="form-control" name="discount" min="0" max="90" value="<?= $produit->discount ?>">
-
             <label class="form-label">Description</label>
             <textarea class="form-control" name="description"><?= $produit->description ?></textarea>
-
             <label class="form-label">Image</label>
             <input type="file" class="form-control" name="image">
-            <img width="250" class="img img-fluid" src="upload/produit/<?= $produit->image ?>"><br>
+            <img width="250" class="img img-fluid" src="upload/products/<?= $produit->image ?>"><br>
             <?php
-
             ?>
-
             <?php
             $categories = $pdo->query('SELECT * FROM categorie')->fetchAll(PDO::FETCH_ASSOC);
             ?>
@@ -112,7 +89,6 @@
             <input type="submit" value="Modifier produit" class="btn btn-primary my-2" name="modifier">
         </form>
     </div>
-
 </body>
 
 </html>
