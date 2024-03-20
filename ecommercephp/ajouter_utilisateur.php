@@ -35,7 +35,7 @@
             <input type="text" class="form-control" name="login">
             <label class="form-label">Password</label>
             <input type="password" class="form-control" name="password"">
-        <input type=" submit" value="Ajouter utilisateur" class="btn btn-primary my-2" name="ajouter">
+        <input type="submit" value="Ajouter utilisateur" class="btn btn-primary my-2" name="ajouter">
         </form>
     </div>
 </body>
